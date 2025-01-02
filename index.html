@@ -1,59 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard SebastianABCD</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 800px;
-        }
-        button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #status {
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-    </style>
+    <title>SebastianABCD - AI Bot Minecraft</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Benvenuto nella Dashboard di SebastianABCD</h1>
-        <p>Clicca sui pulsanti per controllare il bot:</p>
-
-        <button onclick="sendCommand('move')">Muovi il Bot</button>
-        <button onclick="sendCommand('build')">Costruisci qualcosa</button>
-        <button onclick="sendCommand('status')">Mostra lo stato</button>
-
-        <div id="status"></div>
-    </div>
-
-    <script>
-        function sendCommand(command) {
-            fetch(`https://your-api-endpoint.com/command?type=${command}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("status").innerHTML = data.message;
-                })
-                .catch(error => {
-                    console.error('Errore:', error);
-                });
-        }
-    </script>
+    <h1>Benvenuto nel progetto SebastianABCD</h1>
+    <p>Un bot per giocare a Minecraft in autonomia!</p>
 </body>
 </html>
