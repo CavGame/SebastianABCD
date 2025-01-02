@@ -1,28 +1,41 @@
-import time
-from minecraft import authentication, server
+import json
+from server_connector import connect_to_server
+from bot_commands import move_to, mine_block
 
-# Autenticazione con Minecraft
-user = authentication.Authenticator('SebastianABCD', 'nocepandistelle2')
-client = server.MinecraftClient('your.server.ip', 25565, user)
+# Funzione per salvare lo stato
+def save_state(position, inventory):
+    state = {
+        "position": position,
+        "inventory": inventory
+    }
+    with open("bot_state.json", "w") as file:
+        json.dump(state, file, indent=4)
 
-# Funzione per muovere l'AI
-def move_to(x, y, z):
-    client.send_command(f'tp {x} {y} {z}')
+# Funzione per caricare lo stato
+def load_state():
+    try:
+        with open("bot_state.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {"position": [0, 64, 0], "inventory": []}
 
-# Funzione per costruire
-def build_structure():
-    client.send_command('place block at coordinates')  # esempio di comando per costruire
+# Carica lo stato del bot
+bot_state = load_state()
+position = bot_state["position"]
+inventory = bot_state["inventory"]
 
-# Funzione per mostrare lo stato
-def get_status():
-    position = client.get_position()
-    inventory = client.get_inventory()
-    return f'Posizione: {position}, Inventario: {inventory}'
+# Connessione a un server
+server_ip = "play.examplemc.com"
+nickname = "SebastianABCD"
+password = "nocepandistelle2"
+connect_to_server(server_ip, nickname, password)
 
-# Esegui il bot in un loop
-while True:
-    # Decidi cosa fare
-    move_to(100, 64, 100)  # esempio di movimento
-    build_structure()  # esempio di costruzione
-    print(get_status())  # mostra lo stato ogni tanto
-    time.sleep(60)  # pausa tra le azioni
+# Esegui alcune azioni
+new_position = [100, 65, 200]
+position = move_to(position, new_position)
+inventory.append("minecraft:diamond")
+save_state(position, inventory)
+
+# Stampa lo stato aggiornato
+print(f"Posizione aggiornata: {position}")
+print(f"Inventario aggiornato: {inventory}")
