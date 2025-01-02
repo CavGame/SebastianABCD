@@ -1,4 +1,4 @@
 {
-    "position": [x, y, z],
-    "inventory": ["minecraft:"]
+    "position": [0, 64, 0], 
+    "inventory": ["minecraft:stone", "minecraft:wood", "minecraft:iron_ingot"]
 }
